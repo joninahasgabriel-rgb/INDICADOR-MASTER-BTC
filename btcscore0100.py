@@ -12,7 +12,7 @@ st.title("🚀 BTC Capital Flow Dashboard - Score 0-100 (Fluxo Ouro → BTC)")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    btc = yf.download("BTC-USD", period="5d", interval="1h")['Close'].iloc[-1]
+    btc = yf.download("BTC-USD", period="1mo", interval="1h")['Close'].iloc[-1]
     st.metric("BTC Price", f"${btc:,.0f}")
 
 with col2:
