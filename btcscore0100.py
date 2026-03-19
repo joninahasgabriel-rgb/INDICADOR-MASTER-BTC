@@ -14,7 +14,10 @@ with col1:
     btc_data = yf.download("BTC-USD", period="1mo", interval="1h")
     if not btc_data.empty and len(btc_data) > 0:
         btc = btc_data['Close'].iloc[-1]
-        st.metric("BTC Price", f"${btc:,.0f}")
+        if isinstance(btc, (int, float)):
+    st.metric("BTC Price", f"${btc:,.0f}")
+else:
+    st.metric("BTC Price", "N/A")
     else:
         st.warning("Dados de BTC indisponíveis no momento.")
         st.metric("BTC Price", "N/A")
@@ -23,7 +26,10 @@ with col2:
     dxy_data = yf.download("DX-Y.NYB", period="7d")
     if not dxy_data.empty and len(dxy_data) >= 2:
         dxy_change = ((dxy_data['Close'].iloc[-1] - dxy_data['Close'].iloc[0]) / dxy_data['Close'].iloc[0]) * 100
-        st.metric("DXY 7d", f"{dxy_change:.2f}%", delta=f"{dxy_change:.2f}%")
+        if isinstance(dxy_change, (int, float)):
+    st.metric("DXY 7d", f"{dxy_change:.2f}%", delta=f"{dxy_change:.2f}%")
+else:
+    st.metric("DXY 7d", "N/A")
     else:
         st.warning("Dados de DXY indisponíveis.")
         st.metric("DXY 7d", "N/A")
@@ -32,7 +38,10 @@ with col3:
     tnx_data = yf.download("^TNX", period="7d")
     if not tnx_data.empty and len(tnx_data) >= 2:
         tnx_change = ((tnx_data['Close'].iloc[-1] - tnx_data['Close'].iloc[0]) / tnx_data['Close'].iloc[0]) * 100
-        st.metric("10y Yield 7d", f"{tnx_change:.2f}%", delta=f"{tnx_change:.2f}%")
+        if isinstance(tnx_change, (int, float)):
+    st.metric("10y Yield 7d", f"{tnx_change:.2f}%", delta=f"{tnx_change:.2f}%")
+else:
+    st.metric("10y Yield 7d", "N/A")
     else:
         st.warning("Dados de yields indisponíveis.")
         st.metric("10y Yield 7d", "N/A")
@@ -60,7 +69,10 @@ with col4:
     gold_data = yf.download("GC=F", period="7d")
     if not gold_data.empty and len(gold_data) >= 2:
         gold_change = ((gold_data['Close'].iloc[-1] - gold_data['Close'].iloc[0]) / gold_data['Close'].iloc[0]) * 100
-        st.metric("Ouro 7d", f"{gold_change:.2f}%", delta=f"{gold_change:.2f}%")
+        if isinstance(gold_change, (int, float)):
+    st.metric("Ouro 7d", f"{gold_change:.2f}%", delta=f"{gold_change:.2f}%")
+else:
+    st.metric("Ouro 7d", "N/A")
     else:
         st.warning("Dados de ouro indisponíveis.")
         st.metric("Ouro 7d", "N/A")
