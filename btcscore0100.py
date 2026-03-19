@@ -9,10 +9,7 @@ st.set_page_config(page_title="BTC Flow Score 0-100", layout="wide")
 st.title("🚀 BTC Capital Flow Dashboard - Score 0-100 (Fluxo Ouro → BTC)")
 
 # ==================== DADOS AO VIVO ====================
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
- # ==================== DADOS AO VIVO ====================
+# ==================== DADOS AO VIVO ====================
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -29,6 +26,27 @@ with col2:
     if not dxy_data.empty and len(dxy_data) >= 2:
         dxy_change = ((dxy_data['Close'].iloc[-1] - dxy_data['Close'].iloc[0]) / dxy_data['Close'].iloc[0]) * 100
         st.metric("DXY 7d", f"{dxy_change:.2f}%", delta=f"{dxy_change:.2f}%")
+    else:
+        st.warning("Dados de DXY indisponíveis.")
+        st.metric("DXY 7d", "N/A")
+
+with col3:
+    tnx_data = yf.download("^TNX", period="7d")
+    if not tnx_data.empty and len(tnx_data) >= 2:
+        tnx_change = ((tnx_data['Close'].iloc[-1] - tnx_data['Close'].iloc[0]) / tnx_data['Close'].iloc[0]) * 100
+        st.metric("10y Yield 7d", f"{tnx_change:.2f}%", delta=f"{tnx_change:.2f}%")
+    else:
+        st.warning("Dados de yields indisponíveis.")
+        st.metric("10y Yield 7d", "N/A")
+
+with col4:
+    gold_data = yf.download("GC=F", period="7d")
+    if not gold_data.empty and len(gold_data) >= 2:
+        gold_change = ((gold_data['Close'].iloc[-1] - gold_data['Close'].iloc[0]) / gold_data['Close'].iloc[0]) * 100
+        st.metric("Ouro 7d", f"{gold_change:.2f}%", delta=f"{gold_change:.2f}%")
+    else:
+        st.warning("Dados de ouro indisponíveis.")
+        st.metric("Ouro 7d", "N/A")
     else:
         st.warning("Dados de DXY indisponíveis.")
         st.metric("DXY 7d", "N/A")
