@@ -7,8 +7,6 @@ import plotly.express as px
 
 st.set_page_config(page_title="BTC Flow Score 0-100", layout="wide")
 st.title("🚀 BTC Capital Flow Dashboard - Score 0-100 (Fluxo Ouro → BTC)")
-
-# ==================== DADOS AO VIVO ====================
 # ==================== DADOS AO VIVO ====================
 col1, col2, col3, col4 = st.columns(4)
 
@@ -47,9 +45,7 @@ with col4:
     else:
         st.warning("Dados de ouro indisponíveis.")
         st.metric("Ouro 7d", "N/A")
-    else:
-        st.warning("Dados de DXY indisponíveis.")
-        st.metric("DXY 7d", "N/A")
+
 
 with col3:
     tnx_data = yf.download("^TNX", period="7d")
